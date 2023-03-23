@@ -14,6 +14,9 @@ export class RevealCascade extends LitElement {
     this.revealText = 'Read more';
   }
 
+  revealIndicator: string;
+  revealText: string;
+
   // @property() revealIndicator = 'V';
   // @property() revealText = 'Read more';
 

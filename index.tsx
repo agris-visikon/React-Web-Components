@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StrictMode } from 'react';
-import { h, Fragment } from 'preact';
 import { createRoot } from 'react-dom/client';
 
 import App from './App';
