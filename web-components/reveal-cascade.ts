@@ -2,31 +2,43 @@ import { LitElement, html, css } from 'lit';
 
 export class RevealCascade extends LitElement {
   static properties = {
-    headerHeight: {},
+    revealIndicator: {},
+    revealText: {},
+    enablePositioning: { type: Boolean },
   };
 
   constructor() {
     super();
-    this.headerHeight = '0px';
+    this.revealIndicator = 'V';
+    this.revealText = 'Read more';
+    this.enablePositioning = false;
   }
 
-  headerHeight: string;
+  revealIndicator: HTMLElement | string;
+  revealText: HTMLElement | string;
+  enablePositioning: boolean;
 
   static styles = css`
     .container {
       width: 100%;
-      min-height: calc(100vh - var(--header-height, 0px));
-      display: grid;
-    }
-
-    ::slotted([slot='visible-content']) {
+      min-height: 100%;
       display: grid;
       grid-template-rows: auto 1fr;
       background: var(--visible-content-background, inherit);
+      position: var(--relative-enabled, unset);
+    }
+
+    ::slotted([slot='visible-content']) {
+      background: var(--visible-content-background, inherit);
+      margin: var(--content-margin, 0 2em);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     ::slotted([slot='revealable-content']) {
       background: var(--revealable-content-background, inherit);
+      margin: var(--content-margin, 0 2em);
     }
 
     .reveal-controls {
@@ -42,13 +54,22 @@ export class RevealCascade extends LitElement {
 
   render() {
     return html`
-      <div class="container" style="--header-height: ${this.headerHeight};">
+      <div class="container" style=${
+        this.enablePositioning ? '--relative-enabled: relative;' : ''
+      }>
         <slot name="visible-content"></slot>
         <div class="reveal-controls">
           <slot name="reveal-button"></slot>
         </div>
       </div>
       <slot name="revealable-content"></slot>
+      <style>
+      ${
+        this.enablePositioning
+          ? ':host { position: absolute; top: 0; bottom: 0; left: 0; }'
+          : ''
+      }
+    </style>
     `;
   }
 }

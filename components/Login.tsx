@@ -13,7 +13,7 @@ export function Login() {
   const revealIndicator = 'V';
 
   return (
-    <RevealCascade style={customStyles}>
+    <RevealCascade style={customStyles} enablePositioning>
       <div slot="visible-content">
         <VisibleContent />
       </div>
