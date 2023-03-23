@@ -1,38 +1,31 @@
 import { LitElement, html, css } from 'lit';
-// import { customElement, property } from 'lit/decorators.js';
 
-// @customElement('reveal-cascade')
 export class RevealCascade extends LitElement {
   static properties = {
-    revealIndicator: {},
-    revealText: {},
+    headerHeight: {},
   };
 
   constructor() {
     super();
-    this.revealIndicator = 'V';
-    this.revealText = 'Read more';
+    this.headerHeight = '0px';
   }
 
-  revealIndicator: string;
-  revealText: string;
-
-  // @property() revealIndicator = 'V';
-  // @property() revealText = 'Read more';
+  headerHeight: string;
 
   static styles = css`
     .container {
       width: 100%;
-      min-height: 100vh;
+      min-height: calc(100vh - var(--header-height, 0px));
       display: grid;
     }
 
-    ::slotted([slot="visible-content"]) {
+    ::slotted([slot='visible-content']) {
+      display: grid;
       grid-template-rows: auto 1fr;
       background: var(--visible-content-background, inherit);
     }
 
-    ::slotted([slot="revealable-content"]) {
+    ::slotted([slot='revealable-content']) {
       background: var(--revealable-content-background, inherit);
     }
 
@@ -49,11 +42,10 @@ export class RevealCascade extends LitElement {
 
   render() {
     return html`
-      <div class="container">
+      <div class="container" style="--header-height: ${this.headerHeight};">
         <slot name="visible-content"></slot>
         <div class="reveal-controls">
-          ${this.revealText}
-         ${this.revealIndicator}
+          <slot name="reveal-button"></slot>
         </div>
       </div>
       <slot name="revealable-content"></slot>

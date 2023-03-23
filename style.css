@@ -24,6 +24,21 @@ body {
   justify-content: flex-end;
 }
 
+.image-container {
+  height: 200px; /* Set the fixed height for the container */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide any overflowing content */
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Adjust the image size within the container */
+}
+
 /* .visibleContent > div {
   background-color: antiquewhite;
 } */
