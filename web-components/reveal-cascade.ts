@@ -52,8 +52,8 @@ export class RevealCascade extends LitElement {
       <div class="container">
         <slot name="visible-content"></slot>
         <div class="reveal-controls">
-          <span>${this.revealText}</span>
-          <span>${this.revealIndicator}</span>
+          ${this.revealText}
+         ${this.revealIndicator}
         </div>
       </div>
       <slot name="revealable-content"></slot>
